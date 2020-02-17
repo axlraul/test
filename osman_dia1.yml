@@ -1,0 +1,11 @@
+- name: configurar nginx
+  hosts: mariadb
+  become: True
+  roles:
+    - mariadb
+- name: configurar nginx
+  hosts: www
+  become: True
+  roles:
+    - nginx
+
