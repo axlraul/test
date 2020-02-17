@@ -1,4 +1,3 @@
----
 - name: configurar nginx
   hosts: www
   become: True
@@ -14,8 +13,16 @@
         src: templates/index.html.j2
         dest: /usr/share/nginx/html/index.html
 
-- name: instalar mariadb
+- name: configurar mariadb
   hosts: mariadb
   become: True
-  roles:
-    - mariadb
+  tasks:
+    - name: installar paquete mariadb
+      yum:
+        name: "mariadb-server"
+        state: present
+    - name: arrancar mariadb
+      service:
+        name: mariadb
+        state: started
+        enabled: yes
